@@ -180,9 +180,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Simulate form submission (replace with actual form handling)
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
+            // Open user's email client using mailto: populated with form data
+            // Build subject and body, making sure to URL-encode values
+            const subject = encodeURIComponent(`Website contact from ${name}`);
+            const bodyLines = [
+                `Name: ${name}`,
+                `Email: ${email}`,
+                '',
+                message
+            ];
+            const body = encodeURIComponent(bodyLines.join('\n'));
+            const mailto = `mailto:wfjeng@ozemail.com.au?subject=${subject}&body=${body}`;
+
+            // Open the mail client (use window.location to support mobile email apps)
+            window.location.href = mailto;
+
+            // Reset the form after a short delay to allow the mail client to open
+            setTimeout(() => this.reset(), 500);
         });
     }
 
