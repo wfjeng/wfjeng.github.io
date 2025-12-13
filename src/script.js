@@ -155,50 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
     //     });
     // });
 
-    // Contact form handling
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Basic validation
-            if (!name || !email || !message) {
-                alert('Please fill in all fields.');
-                return;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-            
-            // Open user's email client using mailto: populated with form data
-            // Build subject and body, making sure to URL-encode values
-            const subject = encodeURIComponent(`Website contact from ${name}`);
-            const bodyLines = [
-                `Name: ${name}`,
-                `Email: ${email}`,
-                '',
-                message
-            ];
-            const body = encodeURIComponent(bodyLines.join('\n'));
-            const mailto = `mailto:wfjeng@ozemail.com.au?subject=${subject}&body=${body}`;
-
-            // Open the mail client (use window.location to support mobile email apps)
-            window.location.href = mailto;
-
-            // Reset the form after a short delay to allow the mail client to open
-            setTimeout(() => this.reset(), 500);
-        });
-    }
 
     // Add scroll effect to header
     window.addEventListener('scroll', function() {
